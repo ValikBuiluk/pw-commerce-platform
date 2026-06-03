@@ -1,5 +1,7 @@
 # Playwright Commerce Platform Automation Framework
 
+![Playwright Tests](https://github.com/ValikBuiluk/pw-commerce-platform/actions/workflows/playwright.yml/badge.svg)
+
 End-to-end and API test automation framework built with Playwright and TypeScript.
 
 ## Tech Stack
