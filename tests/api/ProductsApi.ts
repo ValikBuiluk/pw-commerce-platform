@@ -4,9 +4,9 @@ export class ProductsApi {
   constructor(private request: APIRequestContext) {}
 
   async getAllProducts() {
-    const response = await this.request.get('/api/productsList');
+    const response = await this.request.get('/products');
 
-    expect(response.status()).toBe(200);
+    expect(response.ok()).toBeTruthy();
 
     return response.json();
   }

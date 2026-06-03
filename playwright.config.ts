@@ -14,14 +14,14 @@ export default defineConfig({
 
   workers: process.env.CI ? 2 : undefined,
 
-  reporter: [
-    ['html'],
-    ['list'],
-    ['allure-playwright']
-  ],
+  reporter: [['html'], ['list'], ['allure-playwright']],
 
   use: {
     baseURL: process.env.BASE_URL,
+
+    extraHTTPHeaders: {
+      Accept: 'application/json'
+    },
 
     trace: 'on-first-retry',
 
@@ -42,34 +42,41 @@ export default defineConfig({
     timeout: 10000
   },
 
-projects: [
-  {
-    name: 'api',
-    testMatch: /.*\.api\.spec\.ts/
-  },
+  projects: [
+    {
+      name: 'api',
+      testMatch: /.*\.api\.spec\.ts/,
+      use: {
+        baseURL: process.env.API_BASE_URL,
 
-  {
-    name: 'chromium',
-    testIgnore: /.*\.api\.spec\.ts/,
-    use: {
-      ...devices['Desktop Chrome']
-    }
-  },
+        extraHTTPHeaders: {
+          Accept: 'application/json'
+        }
+      }
+    },
 
-  {
-    name: 'firefox',
-    testIgnore: /.*\.api\.spec\.ts/,
-    use: {
-      ...devices['Desktop Firefox']
-    }
-  },
+    {
+      name: 'chromium',
+      testIgnore: /.*\.api\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome']
+      }
+    },
 
-  {
-    name: 'webkit',
-    testIgnore: /.*\.api\.spec\.ts/,
-    use: {
-      ...devices['Desktop Safari']
+    {
+      name: 'firefox',
+      testIgnore: /.*\.api\.spec\.ts/,
+      use: {
+        ...devices['Desktop Firefox']
+      }
+    },
+
+    {
+      name: 'webkit',
+      testIgnore: /.*\.api\.spec\.ts/,
+      use: {
+        ...devices['Desktop Safari']
+      }
     }
-  }
-]
+  ]
 });

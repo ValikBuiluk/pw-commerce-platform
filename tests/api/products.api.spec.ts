@@ -7,10 +7,14 @@ test.describe('Products API', () => {
 
     const responseBody = await productsApi.getAllProducts();
 
-    expect(responseBody).toHaveProperty('products');
     expect(responseBody.products.length).toBeGreaterThan(0);
+
     expect(responseBody.products[0]).toHaveProperty('id');
-    expect(responseBody.products[0]).toHaveProperty('name');
+    expect(responseBody.products[0]).toHaveProperty('title');
     expect(responseBody.products[0]).toHaveProperty('price');
+
+    expect(typeof responseBody.products[0].id).toBe('number');
+    expect(typeof responseBody.products[0].title).toBe('string');
+    expect(typeof responseBody.products[0].price).toBe('number');
   });
 });
